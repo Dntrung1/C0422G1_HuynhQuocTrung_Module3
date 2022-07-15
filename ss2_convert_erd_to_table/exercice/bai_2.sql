@@ -7,7 +7,7 @@ USE sales_management;
 CREATE TABLE khach_hang (
     khach_hang_id INT PRIMARY KEY AUTO_INCREMENT,
     khach_hang_name VARCHAR(45),
-    khach_hang_tuoi DATE
+    khach_hang_tuoi tinyint
 );
 
 CREATE TABLE hoa_don (

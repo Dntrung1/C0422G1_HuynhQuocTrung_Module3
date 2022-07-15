@@ -1,8 +1,8 @@
-drop database if exists bai_tap_1;
+drop database if exists xuat_nhap_khau;
 
-create database bai_tap_1;
+create database xuat_nhap_khau;
 
-use bai_tap_1;
+use xuat_nhap_khau;
 
 CREATE TABLE phieu_xuat (
     so_px INT PRIMARY KEY AUTO_INCREMENT,
