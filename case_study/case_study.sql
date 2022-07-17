@@ -49,7 +49,7 @@ CREATE TABLE nhan_vien (
     so_cmnd VARCHAR(45) NOT NULL,
     luong DOUBLE NOT NULL,
     so_dien_thoai VARCHAR(45) NOT NULL,
-    emai VARCHAR(45),
+    email VARCHAR(45),
     dia_chi VARCHAR(45),
     ma_vi_tri INT NOT NULL,
     ma_trinh_do INT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE khach_hang (
     gioi_tinh BIT(1) NOT NULL,
     so_cmnd VARCHAR(45) NOT NULL,
     so_dien_thoai VARCHAR(45) NOT NULL,
-    emai VARCHAR(45),
+    email VARCHAR(45),
     dia_chi VARCHAR(45)
 );
 
@@ -126,11 +126,9 @@ CREATE TABLE hop_dong_chi_tiet (
 );
 
 INSERT INTO furama.vi_tri (ma_vi_tri, ten_vi_tri) 
-VALUES ('1', 'Trung Cấp'),
- ('2', 'Cao Đẳng'),
- ('3', 'Đại Học'),
- ('4', 'Sau Đại Học');
- 
+VALUES ('1', 'Quản Lý'),
+ ('2', 'Nhân viên');
+
  INSERT INTO furama.bo_phan (ma_bo_phan, ten_bo_phan) 
 VALUES ('1', 'Sale-Marketing'),
  ('2', 'Hành chính'),
@@ -144,7 +142,7 @@ VALUES ('1', 'Trung Cấp'),
  ('4', 'Sau Đại Học');
 
  
-INSERT INTO furama.nhan_vien  (ma_nhan_vien, ho_ten, ngay_sinh, so_cmnd, luong, so_dien_thoai, emai, dia_chi, ma_vi_tri, ma_trinh_do, ma_bo_phan) 
+INSERT INTO furama.nhan_vien  (ma_nhan_vien, ho_ten, ngay_sinh, so_cmnd, luong, so_dien_thoai, email, dia_chi, ma_vi_tri, ma_trinh_do, ma_bo_phan) 
  VALUES('1', 'Nguyễn Văn An', '1970-11-07', '456231786', '10000000', '0901234121', 'annguyen@gmail.com', '295 Nguyễn Tất Thành, Đà Nẵng', '1', '3', '1'),
   ('2', 'Lê Văn Bình', '1997-04-09', '654231234', '7000000', '0934212314', 'binhlv@gmail.com', '22 Yên Bái, Đà Nẵng', '1', '2', '2'),
   ('3', 'Hồ Thị Yến', '1995-12-12', '999231723', '14000000', '0412352315', 'thiyen@gmail.com', 'K234/11 Điện Biên Phủ, Gia Lai', '1', '3', '2'),
@@ -164,7 +162,7 @@ VALUES ('1', 'Diamond'),
  ('4', 'Silver'),
  ('5', 'Member');
  
-  INSERT INTO furama.khach_hang  (ma_khach_hang, ho_ten, ngay_sinh, gioi_tinh, so_cmnd, so_dien_thoai, emai, dia_chi, ma_loai_khach) 
+  INSERT INTO furama.khach_hang  (ma_khach_hang, ho_ten, ngay_sinh, gioi_tinh, so_cmnd, so_dien_thoai, email, dia_chi, ma_loai_khach) 
 VALUES ('1', 'Nguyễn Thị Hào', '1970-11-07', 0, '643431213', '0945423362', 'thihao07@gmail.com', '23 Nguyễn Hoàng, Đà Nẵng', '5'),
  ('2', 'Phạm Xuân Diệu', '1992-08-08', 1, '865342123', '0954333333', 'xuandieu92@gmail.com', 'K77/22 Thái Phiên, Quảng Trị', '3'),
  ('3', 'Trương Đình Nghệ', '1990-02-27', 1, '488645199', '0373213122', 'nghenhan2702@gmail.com', 'K323/12 Ông Ích Khiêm, Vinh', '1'),
@@ -221,4 +219,5 @@ values (1,2,4,5),
 (4,3,1,1),
 (5,3,2,11),
 (6,1,3,1),
+(7,1,2,2),
 (8,12,2,2);
