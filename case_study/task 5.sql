@@ -49,21 +49,29 @@ GROUP BY hd.ma_dich_vu;
 -- 8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau.
 -- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên.
 
-select kh.ho_ten
-from khach_hang kh
-group by kh.ho_ten;
+SELECT 
+    kh.ho_ten
+FROM
+    khach_hang kh
+GROUP BY kh.ho_ten;
 
-select distinct ho_ten
-from khach_hang;
+SELECT DISTINCT
+    ho_ten
+FROM
+    khach_hang;
 
 
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
 
-select month(hd.ngay_lam_hop_dong) as month, count(hd.ma_hop_dong) as so_lan_dat_phong
-from hop_dong hd
-where year(hd.ngay_lam_hop_dong ) = 2021
-group by month(hd.ngay_lam_hop_dong)
-order by month(hd.ngay_lam_hop_dong);
+SELECT 
+    MONTH(hd.ngay_lam_hop_dong) AS month,
+    COUNT(hd.ma_hop_dong) AS so_lan_dat_phong
+FROM
+    hop_dong hd
+WHERE
+    YEAR(hd.ngay_lam_hop_dong) = 2021
+GROUP BY MONTH(hd.ngay_lam_hop_dong)
+ORDER BY MONTH(hd.ngay_lam_hop_dong);
 
 -- 10.	Hiển thị thông tin tương ứng với từng hợp đồng thì đã sử dụng bao nhiêu dịch vụ đi kèm. 
 -- Kết quả hiển thị bao gồm ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem 
@@ -77,7 +85,7 @@ SELECT
     SUM(hdct.so_luong) AS 'so luong dich vu di kem'
 FROM
     hop_dong hd
-        left JOIN
+        LEFT JOIN
     hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
 GROUP BY hd.ma_hop_dong;
 

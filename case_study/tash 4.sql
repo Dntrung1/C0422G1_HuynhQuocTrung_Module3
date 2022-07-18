@@ -86,11 +86,11 @@ FROM
     hop_dong hd
         JOIN
     dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
-       JOIN
+       join
     hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
-      JOIN
+      join
     dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
-		RIGHT JOIN
+	 right join
     khach_hang kh ON kh.ma_khach_hang = hd.ma_khach_hang
       JOIN
     loai_khach lk ON lk.ma_loai_khach = kh.ma_loai_khach

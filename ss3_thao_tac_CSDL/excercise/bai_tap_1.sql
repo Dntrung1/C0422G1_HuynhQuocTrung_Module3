@@ -38,7 +38,7 @@ SELECT
     s.studentname, sub.subname, m.mark
 FROM
     student s
-        JOIN
+        JOIN	
     mark m ON s.classid = m.studentid
         JOIN
     subject sub ON m.subid = sub.subid
