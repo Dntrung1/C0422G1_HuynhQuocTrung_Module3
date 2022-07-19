@@ -122,11 +122,4 @@ FROM
         JOIN
     bo_phan bp ON nv.ma_bo_phan = bp.ma_bo_phan
 GROUP BY hd.ma_nhan_vien
-HAVING hd.ma_nhan_vien <= 3
-
-
-
-
-
-
-
+HAVING COUNT(hd.ma_nhan_vien) <= 3
