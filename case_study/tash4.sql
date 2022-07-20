@@ -81,19 +81,18 @@ SELECT
     dv.ten_dich_vu,
     hd.ngay_lam_hop_dong,
     hd.ngay_ket_thuc,
-    (dv.chi_phi_thue + dvdk.gia * hdct.so_luong) AS 'Tong_tien'
+	SUM(dv.chi_phi_thue + ifnull(dvdk.gia * hdct.so_luong,0)) AS 'Tong_tien'
 FROM
     hop_dong hd
-        JOIN
+      left  JOIN
     dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
-       join
+       left JOIN
     hop_dong_chi_tiet hdct ON hd.ma_hop_dong = hdct.ma_hop_dong
-      join
+       left JOIN
     dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
-	 right join
+       right JOIN
     khach_hang kh ON kh.ma_khach_hang = hd.ma_khach_hang
-      JOIN
+     right  JOIN
     loai_khach lk ON lk.ma_loai_khach = kh.ma_loai_khach
-order by(kh.ma_khach_hang);
-
-
+GROUP BY kh.ma_khach_hang,hd.ma_hop_dong
+ORDER BY (kh.ma_khach_hang);
