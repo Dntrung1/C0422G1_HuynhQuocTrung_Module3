@@ -49,17 +49,26 @@ GROUP BY hd.ma_dich_vu;
 -- 8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau.
 -- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên.
 
+-- c1
+
 SELECT 
     kh.ho_ten
 FROM
     khach_hang kh
 GROUP BY kh.ho_ten;
 
+
+
 SELECT DISTINCT
     ho_ten
 FROM
     khach_hang;
 
+select ho_ten
+from khach_hang
+union 
+select ho_ten
+from khach_hang;
 
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
 

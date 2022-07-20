@@ -81,7 +81,7 @@ SELECT
     dv.ten_dich_vu,
     hd.ngay_lam_hop_dong,
     hd.ngay_ket_thuc,
-	SUM(dv.chi_phi_thue + ifnull(dvdk.gia * hdct.so_luong,0)) AS 'Tong_tien'
+	dv.chi_phi_thue + sums( ifnull(dvdk.gia * hdct.so_luong,0)) AS 'Tong_tien'
 FROM
     hop_dong hd
       left  JOIN
