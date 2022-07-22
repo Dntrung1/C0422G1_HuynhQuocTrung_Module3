@@ -25,7 +25,7 @@ WHERE
         FROM
             (SELECT 
                 kh.ma_khach_hang,
-                    dv.chi_phi_thue + SUM(IFNULL(hdct.so_luong * dvdk.gia, 0)) AS tong_tien
+				dv.chi_phi_thue + SUM(IFNULL(hdct.so_luong * dvdk.gia, 0)) AS tong_tien
             FROM
                 khach_hang kh
             RIGHT JOIN hop_dong hd ON kh.ma_khach_hang = hd.ma_khach_hang
