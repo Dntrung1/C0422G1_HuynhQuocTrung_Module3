@@ -19,10 +19,12 @@ public class CaculateServlet extends HttpServlet {
         double first = Double.parseDouble(request.getParameter("first"));
         double second = Double.parseDouble(request.getParameter("second"));
         String tinh = request.getParameter("tinh");
-        System.out.println(tinh);
         Caculator caculator = new Caculator();
         String result = caculator.tinh(first,second,tinh);
         request.setAttribute("result",result);
+        request.setAttribute("first",first);
+        request.setAttribute("second",second);
+        request.setAttribute("tinh",tinh);
         request.getRequestDispatcher("display.jsp").forward(request,response);
     }
 }
