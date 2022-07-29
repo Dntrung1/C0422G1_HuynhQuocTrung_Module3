@@ -46,26 +46,4 @@ public class Caculator {
         String result = Double.toString(first/second);
         return result;
     }
-    public String tinh(double first, double second, String dau){
-        String result = "";
-        switch (dau){
-            case "+":
-                result +=cong(first,second);
-                break;
-            case "-":
-                result +=tru(first,second);
-                break;
-            case "*":
-                result +=nhan(first,second);
-                break;
-            case "/":
-                if (second == 0){
-                    result += "sai";
-                }else {
-                    result +=chia(first, second);
-                }
-                break;
-        }
-        return result;
-    }
 }

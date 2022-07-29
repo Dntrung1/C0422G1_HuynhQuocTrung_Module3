@@ -48,5 +48,6 @@
         </div>
     </div>
 </form>
+<div>Kết quả là: ${result}</div>
 </body>
 </html>
