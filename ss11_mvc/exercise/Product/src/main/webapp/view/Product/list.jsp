@@ -13,8 +13,7 @@
 </head>
 <body>
 <h1>Trang Danh Sách</h1>
-<a href="/Product?action=add">ADD</a>
-<%--<a href="/Product?action=update">edit</a>--%>
+<a style="border: 1px solid; background-color: aqua" href="/Product?action=add">ADD</a>
 <table border="1px">
     <tr>
         <th>STT</th>
@@ -33,10 +32,14 @@
             <td>${product.price}</td>
             <td>${product.describe}</td>
             <td>${product.producer}</td>
-            <td><a href="/Product?action=update&id=${product.id}">Edit</a></td>
-            <td><a href="/Product?action=delete&id=${product.id}">Delete</a></td>
+            <td><a style="background-color: aqua " href="/Product?action=update&id=${product.id}">Edit</a></td>
+            <td><a style="background-color: brown" href="/Product?action=delete&id=${product.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
+<form action="/Product?action=search" method="post">
+    <input type="text" name="search">
+    <button type="submit">Tìm</button>
+</form>
 </body>
 </html>

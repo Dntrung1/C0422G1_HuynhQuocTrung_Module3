@@ -45,4 +45,16 @@ public class ProductRepository implements IProductRepository {
     public Product findById(int id) {
         return products.get(id);
     }
+
+    @Override
+    public List<Product> findByName(String name) {
+        List<Product> productArrayList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            if (name.contains(products.get(i).getName())){
+                productArrayList.add(products.get(i));
+            }
+        }
+        return productArrayList;
+    }
+
 }

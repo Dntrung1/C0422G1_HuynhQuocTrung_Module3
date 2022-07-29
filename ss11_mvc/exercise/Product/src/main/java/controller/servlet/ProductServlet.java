@@ -118,7 +118,18 @@ public class ProductServlet extends HttpServlet {
                 break;
             default:
         }
+        String search = request.getParameter("search");
+        List<Product> products = iProductService.findByName(search);
+        request.setAttribute("product",products);
+        try {
+            request.getRequestDispatcher("view/Prduct/search").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));

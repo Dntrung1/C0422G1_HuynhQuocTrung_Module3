@@ -14,9 +14,12 @@
 <body>
 <h1>Trang thêm mới sản phẩm</h1>
 <a href="/Product">Quay lại trang list</a>
-<c:if test="${mess!=null}">
-    <p>${mess}</p>
-</c:if>
+<div style="color: brown">
+    <c:if test="${mess!=null}">
+        <p>${mess}</p>
+    </c:if>
+</div>
+
 <form action="/Product?action=add" method="post">
     <input type="text" name="id" placeholder="Nhập id">
     <input type="text" name="name" placeholder="Thêm tên sản phẩm">
