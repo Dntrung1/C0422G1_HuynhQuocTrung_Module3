@@ -48,7 +48,7 @@ public class ProductRepository implements IProductRepository {
         List<Product> productArrayList = new ArrayList<>();
         Set<Integer> keys = products.keySet();
         for (int i : keys){
-            if (products.get(i).getName().contains(name)){
+            if (products.get(i).getName().toLowerCase(Locale.ROOT).contains(name.toLowerCase(Locale.ROOT))){
                 productArrayList.add(products.get(i));
             }
         }

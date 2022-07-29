@@ -10,37 +10,44 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
 </head>
 <body>
-<h1>Trang Danh Sách</h1>
-<a style="border: 1px solid; background-color: aqua" href="/Product?action=add">ADD</a>
-<form action="/Product?action=search" method="post">
-    <input type="text" name="search">
-    <button type="submit">Tìm</button>
-</form>
-<table border="1px">
-    <tr>
-        <th>STT</th>
-        <th>ID</th>
-        <th>Tên Sản Phẩm</th>
-        <th>Giá Sản Phâm</th>
-        <th>Mô Tả Sản Phẩm</th>
-        <th>Nhà Sản Xuất</th>
-        <th colspan="2">Update</th>
-    </tr>
-    <c:forEach var="product" items="${productlist}" varStatus="status">
+<div class="container-fluid">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand"> <h1>Trang Danh Sách Sản Phẩm</h1></a>
+            <form class="d-flex" action="/Product?action=search" method="post">
+                <input class="form-control me-2" type="text" name="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <a href="/Product?action=add"><button type="button" class="btn btn-outline-primary">Create</button></a>
+    <table class="table table-success table-striped">
         <tr>
-            <td>${status.count}</td>
-            <td>${product.id}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.describe}</td>
-            <td>${product.producer}</td>
-            <td><a style="background-color: aqua " href="/Product?action=update&id=${product.id}">Edit</a></td>
-            <td><a style="background-color: brown" href="/Product?action=delete&id=${product.id}">Delete</a></td>
+            <th>STT</th>
+            <th>ID</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Giá Sản Phâm</th>
+            <th>Mô Tả Sản Phẩm</th>
+            <th>Nhà Sản Xuất</th>
+            <th colspan="2">Update</th>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var="product" items="${productlist}" varStatus="status">
+            <tr>
+                <td>${status.count}</td>
+                <td>${product.id}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>${product.describe}</td>
+                <td>${product.producer}</td>
+                <td><a href="/Product?action=update&id=${product.id}"><button type="button" class="btn btn-outline-dark">Edit</button></a></td>
+                <td><a href="/Product?action=delete&id=${product.id}"><button type="button" class="btn btn-outline-dark">Delete</button></a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 
 </body>
 </html>
