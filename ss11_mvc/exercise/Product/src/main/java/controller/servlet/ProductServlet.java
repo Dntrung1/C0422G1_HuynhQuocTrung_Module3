@@ -16,6 +16,7 @@ public class ProductServlet extends HttpServlet {
     IProductService iProductService = new ProductService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action==null){
             action = "";
@@ -102,6 +103,7 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action==null){
             action = "";
@@ -115,14 +117,22 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "delete":
                 deleteProduct(request,response);
+            case "search":
+                searchProcduct(request,response);
                 break;
             default:
         }
+
+    }
+
+    private void searchProcduct(HttpServletRequest request, HttpServletResponse response) {
         String search = request.getParameter("search");
         List<Product> products = iProductService.findByName(search);
-        request.setAttribute("product",products);
+        System.out.println(products.toString());
+        System.out.println(products.size());
+        request.setAttribute("productlist",products);
         try {
-            request.getRequestDispatcher("view/Prduct/search").forward(request,response);
+            request.getRequestDispatcher("view/Product/search.jsp").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {

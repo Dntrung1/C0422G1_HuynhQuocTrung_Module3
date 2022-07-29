@@ -14,6 +14,10 @@
 <body>
 <h1>Trang Danh Sách</h1>
 <a style="border: 1px solid; background-color: aqua" href="/Product?action=add">ADD</a>
+<form action="/Product?action=search" method="post">
+    <input type="text" name="search">
+    <button type="submit">Tìm</button>
+</form>
 <table border="1px">
     <tr>
         <th>STT</th>
@@ -37,9 +41,6 @@
         </tr>
     </c:forEach>
 </table>
-<form action="/Product?action=search" method="post">
-    <input type="text" name="search">
-    <button type="submit">Tìm</button>
-</form>
+
 </body>
 </html>
