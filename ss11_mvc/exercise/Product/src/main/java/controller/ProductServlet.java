@@ -1,4 +1,4 @@
-package controller.servlet;
+package controller;
 
 import model.Product;
 import service.IProductService;
@@ -11,42 +11,67 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "ProductServlet", urlPatterns ={"","/Product"})
+@WebServlet(name = "ProductServlet", urlPatterns = {"", "/Product"})
 public class ProductServlet extends HttpServlet {
     IProductService iProductService = new ProductService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
-        if (action==null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "add":
-                showAddProduct(request,response);
+                showAddProduct(request, response);
                 break;
             case "update":
-                showUpdateProduct(request,response);
+                showUpdateProduct(request, response);
                 break;
             case "delete":
-                showDeleteProduct(request,response);
+                showDeleteProduct(request, response);
                 break;
             default:
-                showListProduct(request,response);
+                showListProduct(request, response);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                saveProduct(request, response);
+                break;
+            case "update":
+                updateProduct(request, response);
+                break;
+            case "delete":
+                deleteProduct(request, response);
+            case "search":
+                searchProcduct(request, response);
+                break;
+            default:
+        }
+
     }
 
     private void showDeleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = iProductService.findById(id);
         RequestDispatcher dispatcher;
-        if (product == null){
+        if (product == null) {
             dispatcher = request.getRequestDispatcher("error.jsp");
-        }else {
-            request.setAttribute("product",product);
+        } else {
+            request.setAttribute("product", product);
             dispatcher = request.getRequestDispatcher("view/Product/delete.jsp");
             try {
-                dispatcher.forward(request,response);
+                dispatcher.forward(request, response);
             } catch (ServletException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -56,29 +81,29 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showUpdateProduct(HttpServletRequest request, HttpServletResponse response) {
-      int id = Integer.parseInt(request.getParameter("id"));
-      Product product = iProductService.findById(id);
-      RequestDispatcher dispatcher;
-      if (product == null){
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product = iProductService.findById(id);
+        RequestDispatcher dispatcher;
+        if (product == null) {
             dispatcher = request.getRequestDispatcher("error.jsp");
-      }else {
-          request.setAttribute("product",product);
-          dispatcher = request.getRequestDispatcher("view/Product/edit.jsp");
-          try {
-              dispatcher.forward(request,response);
-          } catch (ServletException e) {
-              e.printStackTrace();
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
-      }
+        } else {
+            request.setAttribute("product", product);
+            dispatcher = request.getRequestDispatcher("view/Product/edit.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
     private void showAddProduct(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/Product/add.jsp");
         try {
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -90,37 +115,13 @@ public class ProductServlet extends HttpServlet {
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/Product/list.jsp");
         List<Product> products = iProductService.findAll();
-        request.setAttribute("productlist",products);
+        request.setAttribute("productlist", products);
         try {
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String action = request.getParameter("action");
-        if (action==null){
-            action = "";
-        }
-        switch (action){
-            case "add":
-                saveProduct(request,response);
-                break;
-            case "update":
-                updateProduct(request,response);
-                break;
-            case "delete":
-                deleteProduct(request,response);
-            case "search":
-                searchProcduct(request,response);
-                break;
-            default:
         }
 
     }
@@ -130,9 +131,9 @@ public class ProductServlet extends HttpServlet {
         List<Product> products = iProductService.findByName(search);
         System.out.println(products.toString());
         System.out.println(products.size());
-        request.setAttribute("productlist",products);
+        request.setAttribute("productlist", products);
         try {
-            request.getRequestDispatcher("view/Product/search.jsp").forward(request,response);
+            request.getRequestDispatcher("view/Product/list.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -144,7 +145,7 @@ public class ProductServlet extends HttpServlet {
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         iProductService.delete(id);
-        showListProduct(request,response);
+        showListProduct(request, response);
     }
 
     private void updateProduct(HttpServletRequest request, HttpServletResponse response) {
@@ -153,9 +154,9 @@ public class ProductServlet extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("price"));
         String describe = request.getParameter("describe");
         String producer = request.getParameter("producer");
-        Product product = new Product(id,name,price,describe,producer);
-        iProductService.update(id,product);
-        showListProduct(request,response);
+        Product product = new Product(id, name, price, describe, producer);
+        iProductService.update(id, product);
+        showListProduct(request, response);
 
     }
 
@@ -165,9 +166,9 @@ public class ProductServlet extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("price"));
         String describe = request.getParameter("describe");
         String producer = request.getParameter("producer");
-        Product product = new Product(id,name,price,describe,producer);
+        Product product = new Product(id, name, price, describe, producer);
         iProductService.add(product);
-        request.setAttribute("mess","Thêm mới thành công");
-        showAddProduct(request,response);
+        request.setAttribute("mess", "Thêm mới thành công");
+        showAddProduct(request, response);
     }
 }
