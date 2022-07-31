@@ -129,8 +129,6 @@ public class ProductServlet extends HttpServlet {
     private void searchProcduct(HttpServletRequest request, HttpServletResponse response) {
         String search = request.getParameter("search");
         List<Product> products = iProductService.findByName(search);
-        System.out.println(products.toString());
-        System.out.println(products.size());
         request.setAttribute("productlist", products);
         try {
             request.getRequestDispatcher("view/Product/list.jsp").forward(request, response);
