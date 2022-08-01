@@ -32,4 +32,14 @@ public class UsersService implements IUsersService {
     public Users findId(int id) {
         return iUsersRepository.findId(id);
     }
+
+    @Override
+    public List<Users> findByCountry(String country) {
+        return iUsersRepository.findByCountry(country);
+    }
+
+    @Override
+    public List<Users> findAllSort() {
+        return iUsersRepository.findAllSort();
+    }
 }

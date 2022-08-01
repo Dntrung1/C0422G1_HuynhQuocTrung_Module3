@@ -14,11 +14,15 @@ import java.util.List;
 
 public class UsersRepository implements IUsersRepository {
     private final String FIND_ID = "select * from users where id =?";
-    private final String SELECT_ALL = "select *from users";
+    private final String SELECT_ALL = "select *from users ";
+    private final String SELECT_ALL_Sort = "select *from users order by name";
     private final String INSERT_INTO = "insert into users(name,email,country)" +
             "value(?,?,?)";
     private final String UPDATE = "update users set name =?,email =?,country =? where id = ?";
     private final String DELETE = "delete from users where id = ?";
+    private final String FIND_BY_COUNTRY = "select *" +
+            "from users " +
+            "where country like concat('%',?,'%')";
     @Override
     public List<Users> findAll() {
         List<Users> users = new ArrayList<>();
@@ -104,6 +108,48 @@ public class UsersRepository implements IUsersRepository {
             e.printStackTrace();
         }
         return users ;
+    }
+
+    @Override
+    public List<Users> findByCountry(String country) {
+        List<Users> users = new ArrayList<>();
+        Connection connection = DatabaseUsers.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_COUNTRY);
+            preparedStatement.setString(1,country);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                Users us = new Users(id,name,email,country);
+                users.add(us);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users ;
+    }
+
+    @Override
+    public List<Users> findAllSort() {
+        List<Users> users = new ArrayList<>();
+        Connection connection = DatabaseUsers.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_Sort);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+                Users us = new Users(id,name,email,country);
+                users.add(us);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 
 }

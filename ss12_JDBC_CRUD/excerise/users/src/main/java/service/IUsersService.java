@@ -10,4 +10,6 @@ public interface IUsersService {
     boolean update(Users users);
     boolean delete(int id);
     Users findId(int id);
+    List<Users> findByCountry(String country);
+    List<Users> findAllSort();
 }

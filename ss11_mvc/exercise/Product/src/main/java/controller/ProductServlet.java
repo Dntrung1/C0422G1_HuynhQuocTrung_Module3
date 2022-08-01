@@ -60,7 +60,6 @@ public class ProductServlet extends HttpServlet {
         }
 
     }
-
     private void showDeleteProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = iProductService.findById(id);

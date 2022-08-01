@@ -30,8 +30,45 @@ public class UsersServlet extends HttpServlet {
             case "delete":
                 deletUsers(request,response);
                 break;
+            case "sort":
+                sortUsers(request,response);
+                break;
             default:
                 showListUsers(request,response);
+        }
+    }
+
+
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                saveUsers(request,response);
+                break;
+            case "update":
+                updateUsers(request,response);
+                break;
+            case "search":
+                searchUsers(request,response);
+                break;
+        }
+    }
+    private void sortUsers(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/users/list.jsp");
+        List<Users> users = iUsersService.findAllSort();
+        request.setAttribute("users", users);
+        try {
+            requestDispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -56,22 +93,18 @@ public class UsersServlet extends HttpServlet {
             }
         }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "add":
-                saveUsers(request,response);
-                break;
-            case "update":
-                updateUsers(request,response);
-                break;
-            case "delete":
-                break;
+
+
+    private void searchUsers(HttpServletRequest request, HttpServletResponse response) {
+        String search = request.getParameter("search");
+        List<Users> users = iUsersService.findByCountry(search);
+        request.setAttribute("users",users);
+        try {
+            request.getRequestDispatcher("view/users/list.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

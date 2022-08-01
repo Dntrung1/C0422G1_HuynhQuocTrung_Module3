@@ -13,6 +13,13 @@
 </head>
 <body>
 <a href="/Users?action=add">thêm mới</a>
+<form action="/Users?action=search" method="post">
+    <input type="text" name="search">
+    <button type="submit">tìm</button>
+</form>
+<a href="/Users?action=sort">
+    <button type="submit">Xắp xếp</button>
+</a>
 <table border="1px">
     <tr>
         <th>id</th>
@@ -21,7 +28,6 @@
         <th>country</th>
         <th>Update</th>
     </tr>
-
     <c:forEach var="users" items="${users}">
         <tr>
             <td>${users.id}</td>
@@ -31,7 +37,6 @@
             <td><a href="/Users?action=update&id=${users.id}">Edit</a></td>
             <td><a href="/Users?action=delete&id=${users.id}">delete</a></td>
         </tr>
-
     </c:forEach>
 
 </table>
