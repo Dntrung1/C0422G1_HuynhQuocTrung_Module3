@@ -122,7 +122,8 @@ public class UsersRepository implements IUsersRepository {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
-                Users us = new Users(id,name,email,country);
+                String country1 = resultSet.getString("country");
+                Users us = new Users(id,name,email,country1);
                 users.add(us);
             }
         } catch (SQLException e) {
