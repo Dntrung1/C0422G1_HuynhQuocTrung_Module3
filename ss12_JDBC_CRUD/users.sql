@@ -10,3 +10,5 @@ create table users(
     email varchar(50) not null,
     country varchar(50)
 );
+insert into users(name,email,country) value("trung","Dntrung1","huế");
+
