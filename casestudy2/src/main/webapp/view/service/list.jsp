@@ -11,9 +11,6 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
 </head>
 <body>
 <h1>Danh sách dịch vụ</h1>
@@ -32,7 +29,7 @@
         <th>Diện tích hồ bơi</th>
         <th>Số tầng</th>
         <th>Dịch vụ miễn phí đi kèm</th>
-        <th>Các chứ năng</th>
+        <th colspan="2">Các chức năng</th>
     </tr>
     <c:forEach var="fac" items="${facilityList}">
         <tr>
@@ -49,11 +46,48 @@
             <td>${fac.numberOfFloors}</td>
             <td>${fac.facilityFree}</td>
             <td>
-                <a class="btn btn-danger" href="/Furama?action=update&id=${fac.idService}&code=${fac.code}">update
+                <a class="btn btn-danger" href="/Furama?action=update&id=${fac.idService}">update
                 </a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="getIdToDelete(${fac.idService})">
+                    Delete
+                </button>
             </td>
         </tr>
     </c:forEach>
 </table>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Confilm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" >
+                <div class="modal-body">
+                    Bạn có chắc chắn xóa không?
+                    <input id="idDelete" type="hidden" name="idDelete">
+                    <input type="hidden" name="action" value="delete">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getIdToDelete(id){
+        document.getElementById("idDelete").value = id;
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -96,7 +96,7 @@ public class UsersRepository implements IUsersRepository {
         Connection connection = DatabaseUsers.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID);
-            preparedStatement.setInt(1,i d);
+            preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");

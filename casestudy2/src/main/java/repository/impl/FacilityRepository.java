@@ -14,20 +14,14 @@ import java.util.List;
 public class FacilityRepository implements IFacilityRepository {
     private final String FIND_ID = "select * from dich_vu where ma_dich_vu =?";
     private final String SELECT_ALL_SERVICE = "select *from dich_vu;";
-    private final String INSERT_INTO_SERVICE = "insert into dich_vu (ten_dich_vu,dien_tich,chi_phi_thue,so_nguoi_toi_Da,ma_kieu_thue,ma_loai_dich_vu,tieu_chuan_phong,mo_ta_tien_nghi_khac,dien_tich_ho_boi,so_tang,dich_vu_mien_phi_di_kem) \n" +
+    private final String INSERT_INTO_SERVICE = "insert into dich_vu" +
+            " (ten_dich_vu,dien_tich,chi_phi_thue,so_nguoi_toi_Da,ma_kieu_thue,ma_loai_dich_vu,tieu_chuan_phong,mo_ta_tien_nghi_khac,dien_tich_ho_boi,so_tang,dich_vu_mien_phi_di_kem) \n" +
             "value (?,?,?,?,?,?,?,?,?,?,?)";
     private final String UPDATE = "update dich_vu" +
-            "set ten_dich_vu = ?,dien_tich = ?,chi_phi_thue = ?,so_nguoi_toi_Da = ?,ma_kieu_thue= ?, tieu_chuan_phong = ?, mo_ta_tien_nghi_khac = ?, dien_tich_ho_boi = ?,so_tang = ?,dich_vu_mien_phi_di_kem" +
+            " set ten_dich_vu = ?,dien_tich = ?,chi_phi_thue = ?,so_nguoi_toi_Da = ?,ma_kieu_thue= ?,ma_loai_dich_vu = ?," +
+            " tieu_chuan_phong = ?, mo_ta_tien_nghi_khac = ?, dien_tich_ho_boi = ?,so_tang = ?,dich_vu_mien_phi_di_kem = ? " +
             "where ma_dich_vu = ?;";
-//    private final String UPDATE_VILLA = "update dich_vu" +
-//            "set ten_dich_vu = ?,dien_tich = ?,chi_phi_thue = ?,so_nguoi_toi_Da = ?,ma_kieu_thue= ?, tieu_chuan_phong = ?, mo_ta_tien_nghi_khac = ?, dien_tich_ho_boi = ?,so_tang = ?" +
-//            "where ma_dich_vu = ?;";
-//    private final String UPDATE_ROOM = "update dich_vu" +
-//            "set ten_dich_vu = ?,dien_tich = ?,chi_phi_thue = ?,so_nguoi_toi_Da = ?,ma_kieu_thue= ?, dich_vu_mien_phi_di_kem = ?" +
-//            "where ma_dich_vu = ?;";
-//    private final String UPDATE_HOUSE = "update dich_vu" +
-//            "set ten_dich_vu = ?,dien_tich = ?,chi_phi_thue = ?,so_nguoi_toi_Da = ?,ma_kieu_thue= ?, tieu_chuan_phong = ?, mo_ta_tien_nghi_khac = ?, so_tang = ?" +
-//            "where ma_dich_vu = ?;";
+    private final String DELETE = "delete from dich_vu where ma_dich_vu = ? ";
 
     @Override
     public List<Facility> findAllService() {
@@ -99,7 +93,21 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setDouble(9, facility.getPoolArea());
             preparedStatement.setInt(10, facility.getNumberOfFloors());
             preparedStatement.setString(11, facility.getFacilityFree());
-            preparedStatement.setInt(12,facility.getIdService());
+            preparedStatement.setInt(12, facility.getIdService());
+            int check = preparedStatement.executeUpdate();
+            return (check == 1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteFacility(int id) {
+        Connection connection = Database.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement.setInt(1, id);
             int check = preparedStatement.executeUpdate();
             return (check == 1);
         } catch (SQLException e) {
@@ -116,7 +124,7 @@ public class FacilityRepository implements IFacilityRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString("ten_dich_vu");
                 double area = resultSet.getDouble("dien_tich");
                 double cost = resultSet.getDouble("chi_phi_thue");

@@ -50,11 +50,11 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Danh sách nhân viên</a></li>
-                            <li><a class="dropdown-item" href="#">Danh sách khách hàng</a></li>
+                            <li><a href="/Furama?action=listCustomer" class="dropdown-item" href="#">Danh sách khách hàng</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a href="/Furama" class="dropdown-item" href="#">Danh sách dịch vụ</a></li>
+                            <li><a href="/Furama?action=listService" class="dropdown-item" href="#">Danh sách dịch vụ</a></li>
                         </ul>
                     </li>
                 </ul>

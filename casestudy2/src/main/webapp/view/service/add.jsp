@@ -65,7 +65,7 @@
                     descriptionOtherConvenience.style.display = "none"
                     document.getElementById("descriptionOtherConvenience").value = "";
                     poolArea.style.display = "none"
-                    document.getElementById("poolArea").value = 0;
+                    // document.getElementById("poolArea").value = 0;
                     numberOfFloors.style.display = "none"
                     document.getElementById("numberOfFloors").value = 0;
                     facilityFree.style.display = "block"

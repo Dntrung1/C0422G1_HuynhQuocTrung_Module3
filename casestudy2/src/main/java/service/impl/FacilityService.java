@@ -25,6 +25,11 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
+    public boolean deleteFacility(int id) {
+        return iFacilityRepository.deleteFacility(id);
+    }
+
+    @Override
     public Facility findID(int id) {
         return iFacilityRepository.findID(id);
     }

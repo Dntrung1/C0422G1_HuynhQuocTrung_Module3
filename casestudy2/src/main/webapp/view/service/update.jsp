@@ -9,10 +9,15 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <form action="/Furama?action=update" method="post">
-    <input type="text" disabled value="${code}" name="code">
+    <input type="text" id="code" value="${facility.code}" name="code">
+    <input type="hidden" name="id" value="${facility.idService}">
     <input value="${facility.name}" class="form-control" type="text" aria-label="Disabled input example" name="name" placeholder="tên">
     <input value="${facility.area}" class="form-control" type="number" aria-label="Disabled input example" name="area" placeholder="diện tích">
     <input value="${facility.cost}" class="form-control" type="number" aria-label="Disabled input example" name="cost"
@@ -34,14 +39,18 @@
            name="facilityFree" placeholder="dịch vụ miễn phí đi kèm">
     <button type="submit">Save</button>
     <script>
+        window.onload = function() {
+            let code =  document.getElementById("code").value;
+            display(code)
+        };
         function display() {
-            let value = document.getElementById("selectService").value;
+            let value = document.getElementById("code").value;
             let standardRoom = document.getElementById("standardRoom");
             let descriptionOtherConvenience = document.getElementById("descriptionOtherConvenience");
             let poolArea = document.getElementById("poolArea");
             let numberOfFloors = document.getElementById("numberOfFloors");
             let facilityFree = document.getElementById("facilityFree");
-            switch () {
+            switch (value) {
                 case "1":
                     standardRoom.style.display = "block"
                     descriptionOtherConvenience.style.display = "block"
