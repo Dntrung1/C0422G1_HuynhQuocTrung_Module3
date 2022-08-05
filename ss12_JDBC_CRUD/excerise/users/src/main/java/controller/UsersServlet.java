@@ -10,9 +10,10 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UsersServlet", urlPatterns ={"","/Users"})
+@WebServlet(name = "UsersServlet", urlPatterns = {"", "/Users"})
 public class UsersServlet extends HttpServlet {
     IUsersService iUsersService = new UsersService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -22,19 +23,19 @@ public class UsersServlet extends HttpServlet {
         }
         switch (action) {
             case "add":
-                showFormAdd(request,response);
+                showFormAdd(request, response);
                 break;
             case "update":
-                showUpdate(request,response);
+                showUpdate(request, response);
                 break;
             case "delete":
-                deletUsers(request,response);
+                deletUsers(request, response);
                 break;
             case "sort":
-                sortUsers(request,response);
+                sortUsers(request, response);
                 break;
             default:
-                showListUsers(request,response);
+                showListUsers(request, response);
         }
     }
 
@@ -47,16 +48,17 @@ public class UsersServlet extends HttpServlet {
         }
         switch (action) {
             case "add":
-                saveUsers(request,response);
+                saveUsers(request, response);
                 break;
             case "update":
-                updateUsers(request,response);
+                updateUsers(request, response);
                 break;
             case "search":
-                searchUsers(request,response);
+                searchUsers(request, response);
                 break;
         }
     }
+
     private void sortUsers(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("view/users/list.jsp");
         List<Users> users = iUsersService.findAllSort();
@@ -73,30 +75,29 @@ public class UsersServlet extends HttpServlet {
     private void deletUsers(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         iUsersService.delete(id);
-        showListUsers(request,response);
+        showListUsers(request, response);
     }
 
     private void showUpdate(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         Users users = iUsersService.findId(id);
         RequestDispatcher dispatcher;
-            request.setAttribute("users", users);
-            dispatcher = request.getRequestDispatcher("view/users/update.jsp");
-            try {
-                dispatcher.forward(request, response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        request.setAttribute("users", users);
+        dispatcher = request.getRequestDispatcher("view/users/update.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
+    }
 
 
     private void searchUsers(HttpServletRequest request, HttpServletResponse response) {
         String search = request.getParameter("search");
         List<Users> users = iUsersService.findByCountry(search);
-        request.setAttribute("users",users);
+        request.setAttribute("users", users);
         try {
             request.getRequestDispatcher("view/users/list.jsp").forward(request, response);
         } catch (ServletException e) {
@@ -111,7 +112,7 @@ public class UsersServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        Users users = new Users(id,name,email,country);
+        Users users = new Users(id, name, email, country);
         iUsersService.update(users);
         showListUsers(request, response);
     }
@@ -141,12 +142,11 @@ public class UsersServlet extends HttpServlet {
     }
 
 
-
     private void saveUsers(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        Users users = new Users(name,email,country);
+        Users users = new Users(name, email, country);
         iUsersService.add(users);
         request.setAttribute("mess", "Thêm mới thành công");
         showFormAdd(request, response);

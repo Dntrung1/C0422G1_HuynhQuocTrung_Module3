@@ -165,12 +165,12 @@ public class UsersRepository implements IUsersRepository {
             preparedStatementUser.setString(3,"dn");
             int rowAffect = preparedStatementUser.executeUpdate();
 
+
             PreparedStatement preparedStatementEmployee = connection.prepareStatement("insert into employee(id,name,salary) value(?,?,?);");
             preparedStatementEmployee.setInt(1,2);
             preparedStatementEmployee.setString(2,"Heo");
             preparedStatementEmployee.setInt(3,500);
             rowAffect += preparedStatementEmployee.executeUpdate();
-
             if (rowAffect==2){
                 connection.commit();
             }else {
