@@ -13,9 +13,20 @@
     <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
 </head>
 <body>
-<h1>Danh sách dịch vụ</h1>
-<a href="/Furama?action=add">THêm mới</a>
-<table border="1px">
+<div class="container-fluid">
+<nav class="navbar navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white">Danh sách dịch vụ</a>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+    <div class="m-1">
+        <a class="btn btn-primary" href="/Furama?action=add">Thêm mới</a>
+    </div>
+<table class="table table-dark table-striped">
     <tr>
         <th>Mã dịch vụ</th>
         <th>Tên dịch vụ</th>
@@ -58,6 +69,7 @@
     </c:forEach>
 </table>
 
+</div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

@@ -46,12 +46,19 @@ public class FuramaServlet extends HttpServlet {
                 break;
             case "updateCustomer":
                 showFormUpdateCustomer(request,response);
+                break;
+            case "deleteCustomer":
+                deleteCustomer(request,response);
+                break;
             case "delete":
                 deleteService(request,response);
                 break;
-            default:
-
         }
+    }
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        iCustomerService.deleteCustomer(id);
+        showListCustomer(request,response);
     }
 
     private void showFormUpdateCustomer(HttpServletRequest request, HttpServletResponse response) {
