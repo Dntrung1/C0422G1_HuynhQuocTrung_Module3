@@ -9,31 +9,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Trang danh sách khách hàng</title>
     <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
 </head>
 <body>
+<div class="container-fluid">
 <div class="m-2">
-    <a class="btn btn-primary" href="/Furama?action=addCustomer">THêm mới</a>
+    <a class="btn btn-primary" href="/Furama?action=addCustomer">Thêm mới</a>
 </div>
 
 <table class="table table-dark table-striped">
     <tr>
         <th>Mã Khách hàng</th>
-        <th>loại khách</th>
+        <th>Loại khách</th>
         <th>Họ và tên</th>
         <th>Ngày sinh</th>
         <th>Giới tính</th>
-        <th>Số chứng minh nhân dân</th>
+        <th>Số CMND</th>
         <th>Số điện thoại</th>
-        <th>email</th>
-        <th>địa chỉ</th>
+        <th>Email</th>
+        <th>Địa chỉ</th>
         <th>Trạng thái</th>
         <th colspan="2">Chức năng</th>
     </tr>
     <c:forEach var="cus" items="${customerList}">
         <tr>
-            <td>${cus.idCustomer}</td>
+            <td class="m-auto">${cus.idCustomer}</td>
             <c:forEach var="lk" items="${customerTypeList}">
                 <c:if test="${lk.idCustomerType == cus.customerTypeId}">
                     <td>${lk.name}</td>
@@ -60,19 +61,19 @@
                 <td>Đã xóa</td>
             </c:if>
             <td>
-                <a class="btn btn-danger" href="/Furama?action=updateCustomer&id=${cus.idCustomer}">Update</a>
+                <a class="btn btn-warning" href="/Furama?action=updateCustomer&id=${cus.idCustomer}">Chỉnh sửa</a>
             </td>
             <td>
-                <button onclick="setIdToFormDelete('${cus.idCustomer}','${cus.name}')" class="btn btn-primary"
+                <button onclick="setIdToFormDelete('${cus.idCustomer}','${cus.name}')" class="btn btn-danger"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteModal">
-                    Delete
+                    Xóa
                 </button>
             </td>
         </tr>
     </c:forEach>
 </table>
-
+</div>
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

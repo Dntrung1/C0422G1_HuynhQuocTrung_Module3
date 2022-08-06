@@ -35,6 +35,7 @@
     <input value="${customer.phone}" type="text" name="phone" placeholder="Số diện thoại">
     <input  value="${customer.email}" type="text" name="email" placeholder="Email" >
     <input  value="${customer.address}" type="text" name="address" placeholder="Địa chỉ" >
+    <input  value="${customer.status}" type="hidden" name="status" placeholder="trạng thái" >
     <button type="submit">Save</button>
 </form>
 </body>
