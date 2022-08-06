@@ -56,7 +56,7 @@
                 <a class="btn btn-danger" href="/Furama?action=updateCustomer&id=${cus.idCustomer}">Update</a>
             </td>
             <td>
-                <button onclick="setIdToFormDelete(${cus.idCustomer}),showInfoName(${cus.name})" class="btn btn-primary" data-bs-toggle="modal"
+                <button onclick="setIdToFormDelete('${cus.idCustomer}','${cus.name}')" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#deleteModal">
                     Delete
                 </button>
@@ -90,16 +90,13 @@
 </form>
 
 <script>
-    function setIdToFormDelete(id){
+    function setIdToFormDelete(id,name){
         document.getElementById("idCustomerInput").value = id;
+        document.getElementById("deleteName").innerText = name;
     }
 
     function sumitFormDelete(){
         document.getElementById("formDelete").submit();
-    }
-
-    function showInfoName(name){
-        document.getElementById("deleteName").innerText = name;
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
