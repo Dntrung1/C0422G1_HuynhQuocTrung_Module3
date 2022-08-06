@@ -137,7 +137,8 @@ public class FuramaServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        Customer customer = new Customer(id,customerTypeId,name,birthday,gender,idCard,phone,email,address);
+        int status = Integer.parseInt(request.getParameter("status"));
+        Customer customer = new Customer(id,customerTypeId,name,birthday,gender,idCard,phone,email,address,status);
         iCustomerService.updateCustomer(customer);
         showListCustomer(request,response);
     }

@@ -12,11 +12,14 @@ public class Customer {
     private String phone;
     private String email;
     private String address;
+    private int status;
 
     public Customer() {
     }
 
-    public Customer(int idCustomer, String customerTypeId, String name, String birthday, byte gender, String idCard, String phone, String email, String address) {
+
+
+    public Customer(int idCustomer, String customerTypeId, String name, String birthday, byte gender, String idCard, String phone, String email, String address,int status) {
         this.idCustomer = idCustomer;
         this.customerTypeId = customerTypeId;
         this.name = name;
@@ -26,6 +29,15 @@ public class Customer {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Customer(String customerTypeId, String name, String birthday, byte gender, String idCard, String phone, String email, String address) {

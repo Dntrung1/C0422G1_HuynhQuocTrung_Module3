@@ -28,6 +28,7 @@
         <th>Số điện thoại</th>
         <th>email</th>
         <th>địa chỉ</th>
+        <th>Trạng thái</th>
         <th colspan="2">Chức năng</th>
     </tr>
     <c:forEach var="cus" items="${customerList}">
@@ -52,11 +53,18 @@
             <td>${cus.phone}</td>
             <td>${cus.email}</td>
             <td>${cus.address}</td>
+            <c:if test="${cus.status==1}">
+                <td>tồn tại</td>
+            </c:if>
+            <c:if test="${cus.status==0}">
+                <td>Đã xóa</td>
+            </c:if>
             <td>
                 <a class="btn btn-danger" href="/Furama?action=updateCustomer&id=${cus.idCustomer}">Update</a>
             </td>
             <td>
-                <button onclick="setIdToFormDelete('${cus.idCustomer}','${cus.name}')" class="btn btn-primary" data-bs-toggle="modal"
+                <button onclick="setIdToFormDelete('${cus.idCustomer}','${cus.name}')" class="btn btn-primary"
+                        data-bs-toggle="modal"
                         data-bs-target="#deleteModal">
                     Delete
                 </button>
@@ -90,12 +98,12 @@
 </form>
 
 <script>
-    function setIdToFormDelete(id,name){
+    function setIdToFormDelete(id, name) {
         document.getElementById("idCustomerInput").value = id;
         document.getElementById("deleteName").innerText = name;
     }
 
-    function sumitFormDelete(){
+    function sumitFormDelete() {
         document.getElementById("formDelete").submit();
     }
 </script>

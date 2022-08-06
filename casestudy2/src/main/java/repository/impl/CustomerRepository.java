@@ -21,7 +21,7 @@ public class CustomerRepository implements ICustomerRepository {
             " values(?,?,?,?,?,?,?,?);";
     private final String UPDATE = "update khach_hang " +
             "set ma_loai_khach = ?, ho_ten = ?, ngay_sinh = ?,gioi_tinh = ?,so_cmnd = ?,so_dien_thoai = ?, email = ?, dia_chi =? where ma_khach_hang = ?;";
-
+    private final String DELETE_UPDATE = "update khach_hang set trang_thai = 0 where ma_khach_hang = ? ";
     @Override
     public List<Customer> findAllCustomer() {
         List<Customer> customers = new ArrayList<>();
@@ -39,7 +39,8 @@ public class CustomerRepository implements ICustomerRepository {
                 String phone = resultSet.getString("so_dien_thoai");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("dia_chi");
-                Customer customer = new Customer(id, customerTypeId, name, birthday, gender, idCard, phone, email, address);
+                int status = resultSet.getInt("trang_thai");
+                Customer customer = new Customer(id, customerTypeId, name, birthday, gender, idCard, phone, email, address, status);
                 customers.add(customer);
             }
         } catch (SQLException e) {
@@ -95,10 +96,10 @@ public class CustomerRepository implements ICustomerRepository {
     public boolean deleteCustomer(int id) {
         Connection connection = Database.getConnectDB();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-            preparedStatement.setInt(1, id);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_UPDATE);
+            preparedStatement.setInt(1,id);
             int check = preparedStatement.executeUpdate();
-            return (check == 1);
+            return (check==1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,7 +123,8 @@ public class CustomerRepository implements ICustomerRepository {
                 String phone = resultSet.getString("so_dien_thoai");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("dia_chi");
-                customer = new Customer(id, customerTypeId, name, birthday, gender, idCard, phone, email, address);
+                int status = resultSet.getInt("trang_thai");
+                customer = new Customer(id, customerTypeId, name, birthday, gender, idCard, phone, email, address,status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
