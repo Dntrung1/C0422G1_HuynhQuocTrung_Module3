@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Trang chủ</title>
     <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Ẩm thực</a>
+                        <a href="/Furama?action=listContact" class="nav-link active" aria-current="page" href="#">Hợp đồng</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sự kiện</a>
@@ -49,7 +49,7 @@
                             Danh sách
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Danh sách nhân viên</a></li>
+                            <li><a href="/Furama?action=listEmployee" class="dropdown-item" href="#">Danh sách nhân viên</a></li>
                             <li><a href="/Furama?action=listCustomer" class="dropdown-item" href="#">Danh sách khách hàng</a></li>
                             <li>
                                 <hr class="dropdown-divider">

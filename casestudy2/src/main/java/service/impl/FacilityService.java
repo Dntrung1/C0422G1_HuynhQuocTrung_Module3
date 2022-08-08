@@ -5,18 +5,35 @@ import repository.IFacilityRepository;
 import repository.impl.FacilityRepository;
 import service.IFacilityService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FacilityService implements IFacilityService {
     IFacilityRepository iFacilityRepository = new FacilityRepository();
+
     @Override
     public List<Facility> findAllService() {
         return iFacilityRepository.findAllService();
     }
 
     @Override
-    public boolean addFacility(Facility facility) {
-        return iFacilityRepository.addFacility(facility);
+    public Map<String, String> addFacility(Facility facility) {
+        Map<String, String> mapErrors = new HashMap<>();
+        if (!facility.getName().isEmpty()) {
+            if (!facility.getName().matches("[A-Za-z0-9]+")) {
+                mapErrors.put("name", "Please input right format!");
+            }
+        } else {
+            mapErrors.put("name", "Please input name!");
+        }
+        if (facility.getNumberOfFloors() < 0) {
+            mapErrors.put("numberOfFloors", "please the number of floors is not negative!");
+        }
+        if (mapErrors.size() == 0) {
+            this.iFacilityRepository.addFacility(facility);
+        }
+        return mapErrors;
     }
 
     @Override

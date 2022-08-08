@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Danh sách dịch vụ</title>
     <link rel="stylesheet" href="bootstrap-5.0.2-dist\css\bootstrap.css">
 </head>
 <body>
